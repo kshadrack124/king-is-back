@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 20px;
+        }
+        section {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        section.active {
+            display: block;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input, textarea, button {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Student Portal</h1>
+        <p>Manage Fees, View Results, and Report Online</p>
+    </header>
+
+    <nav>
+        <a href="#fees" onclick="showSection('fees')">Fee Management</a>
+        <a href="#results" onclick="showSection('results')">Results</a>
+        <a href="#reporting" onclick="showSection('reporting')">Online Reporting</a>
+    </nav>
+
+    <div class="container">
+        <section id="fees" class="active">
+            <h2>Fee Management</h2>
+            <p>View and manage your fees here.</p>
+            <form id="feeForm">
+                <label for="studentId">Student ID:</label>
+                <input type="text" id="studentId" name="studentId" required>
+                
+                <button type="button" onclick="viewFees()">View Fees</button>
+            </form>
+            <div id="feeDetails">
+                <!-- Fee details will be displayed here -->
+            </div>
+        </section>
+
+        <section id="results">
+            <h2>Results</h2>
+            <p>View your exam results.</p>
+            <form id="resultForm">
+                <label for="resultStudentId">Student ID:</label>
+                <input type="text" id="resultStudentId" name="resultStudentId" required>
+                
+                <label for="semester">Semester:</label>
+                <select id="semester" name="semester">
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <!-- Add more options as needed -->
+                </select>
+                
+                <button type="button" onclick="viewResults()">View Results</button>
+            </form>
+            <table id="resultTable" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Results will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="reporting">
+            <h2>Online Reporting</h2>
+            <p>Report any issues or feedback.</p>
+            <form id="reportForm">
+                <label for="reportStudentId">Student ID:</label>
+                <input type="text" id="reportStudentId" name="reportStudentId" required>
+                
+                <label for="issueType">Issue Type:</label>
+                <select id="issueType" name="issueType">
+                    <option value="fee">Fee Related</option>
+                    <option value="result">Result Related</option>
+                    <option value="other">Other</option>
+                </select>
+                
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="5" required></textarea>
+                
+                <button type="button" onclick="submitReport()">Submit Report</button>
+            </form>
+            <div id="reportStatus">
+                <!-- Status message will be displayed here -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function viewFees() {
+            // Simulate fetching fee details
+            const feeDetails = document.getElementById('feeDetails');
+            feeDetails.innerHTML = `
+                <p>Outstanding Fees: $500</p>
+                <p>Due Date: 2025-12-01</p>
+                <button onclick="payFees()">Pay Now</button>
+            `;
+        }
+
+        function payFees() {
+            alert('Payment processed successfully!');
+        }
+
+        function viewResults() {
+            // Simulate fetching results
+            const tbody = document.querySelector('#resultTable tbody');
+            tbody.innerHTML = `
+                <tr><td>Math</td><td>85</td><td>A</td></tr>
+                <tr><td>Science</td><td>90</td><td>A+</td></tr>
+                <tr><td>English</td><td>78</td><td>B</td></tr>
+            `;
+            document.getElementById('resultTable').style.display = 'table';
+        }
+
+        function submitReport() {
+            // Simulate submitting report
+            const reportStatus = document.getElementById('reportStatus');
+            reportStatus.innerHTML = '<p>Report submitted successfully!</p>';
+        }
+    </script>
+
+</body>
+</html>
